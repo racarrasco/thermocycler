@@ -43,7 +43,8 @@ Adafruit_MAX31855 thermocouple(MAXCS);
 
 
 // LED controller is plugged into port 9 on the arduino
-#define LED_PIN 6
+#define LED1_PIN 6
+#define LED2_PIN 5
 // Fan
 #define FAN_PIN 7
 #define CMD_LEN 40
@@ -117,12 +118,14 @@ void turnoffFan() { //turn off FAN
 void turnonLED(int v) {
   //v=-1*v+255;
   ledval=v;
-  analogWrite(LED_PIN, ledval);
+  analogWrite(LED1_PIN, ledval);
+  analogWrite(LED2_PIN, ledval);
 }
 void turnoffLED() { //turn off LED
   //ledval=255;
   ledval=0;
-  analogWrite(LED_PIN, ledval);
+  analogWrite(LED1_PIN, ledval);
+  analogWrite(LED2_PIN, ledval);
 }
 double getTemp() { //get Temperature
   //for 31855
@@ -143,8 +146,8 @@ void setup() {
   }
   timearr0=millis()/1000;
   
-  pinMode(LED_PIN, OUTPUT); pinMode(FAN_PIN, OUTPUT);
-  ledval=0; analogWrite(LED_PIN, ledval);  
+  pinMode(LED1_PIN, OUTPUT); pinMode(LED2_PIN, OUTPUT); pinMode(FAN_PIN, OUTPUT);
+  ledval=0; analogWrite(LED1_PIN, ledval); analogWrite(LED2_PIN, ledval); 
   digitalWrite(FAN_PIN, LOW);
   
   // flush command buffer
